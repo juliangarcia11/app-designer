@@ -6,6 +6,8 @@ import { OllamaStatusAlert } from "@/components/ollama-status-alert";
 import { ProgressIndicator } from "@/components/progress-indicator";
 import { QuestionPrompt } from "@/components/question-prompt";
 import { RequirementsComplete } from "@/components/requirements-complete";
+import { ThemeToggle } from "@/components/theme-toggle";
+import { ThemeProvider } from "@/hooks/use-theme";
 import { useWorkflow } from "@/hooks/use-workflow";
 import "./App.css";
 
@@ -35,59 +37,64 @@ function App(): React.ReactElement {
   const handleViewDocument = () => setActiveTab("document");
 
   return (
-    <div className="container mx-auto py-8 px-4">
-      <OllamaStatusAlert />
+    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+      <div className="container mx-auto py-8 px-4">
+        <OllamaStatusAlert />
 
-      <h1 className="text-2xl font-bold mb-6 text-center">
-        Intelligent Application Design Assistant
-      </h1>
+        <h1 className="text-2xl font-bold mb-6 text-center">
+          Intelligent Application Design Assistant
+        </h1>
 
-      <ProgressIndicator
-        completed={completedQuestionsCount}
-        total={totalQuestions}
-        percentage={progressPercentage}
-      />
+        <ProgressIndicator
+          completed={completedQuestionsCount}
+          total={totalQuestions}
+          percentage={progressPercentage}
+        />
 
-      <Tabs
-        value={activeTab}
-        onValueChange={(value) =>
-          setActiveTab(value as "requirements" | "document")
-        }
-        className="w-full"
-      >
-        <TabsList className="grid w-full grid-cols-2">
-          <TabsTrigger value="requirements">Requirements</TabsTrigger>
-          <TabsTrigger
-            value="document"
-            disabled={state.designDocument.status === "draft"}
-          >
-            Design Document
-          </TabsTrigger>
-        </TabsList>
+        <Tabs
+          value={activeTab}
+          onValueChange={(value) =>
+            setActiveTab(value as "requirements" | "document")
+          }
+          className="w-full"
+        >
+          <TabsList className="grid w-full grid-cols-2">
+            <TabsTrigger value="requirements">Requirements</TabsTrigger>
+            <TabsTrigger
+              value="document"
+              disabled={state.designDocument.status === "draft"}
+            >
+              Design Document
+            </TabsTrigger>
+          </TabsList>
 
-        <TabsContent value="requirements" className="mt-6">
-          {nextQuestion ? (
-            <QuestionPrompt
-              question={nextQuestion}
-              onSubmit={handleQuestionSubmit}
-              isLoading={isProcessing}
-            />
-          ) : (
-            <RequirementsComplete onViewDocument={handleViewDocument} />
-          )}
-        </TabsContent>
+          <TabsContent value="requirements" className="mt-6">
+            {nextQuestion ? (
+              <QuestionPrompt
+                question={nextQuestion}
+                onSubmit={handleQuestionSubmit}
+                isLoading={isProcessing}
+              />
+            ) : (
+              <RequirementsComplete onViewDocument={handleViewDocument} />
+            )}
+          </TabsContent>
 
-        <TabsContent value="document" className="mt-6">
-          <DesignDocumentView document={state.designDocument} />
+          <TabsContent value="document" className="mt-6">
+            <DesignDocumentView document={state.designDocument} />
 
-          {designDocumentReady && (
-            <div className="mt-6 flex justify-center">
-              <Button>Export Design Document</Button>
-            </div>
-          )}
-        </TabsContent>
-      </Tabs>
-    </div>
+            {designDocumentReady && (
+              <div className="mt-6 flex justify-center">
+                <Button>Export Design Document</Button>
+              </div>
+            )}
+          </TabsContent>
+        </Tabs>
+      </div>
+      <div className="absolute bottom-4 left-4">
+        <ThemeToggle />
+      </div>
+    </ThemeProvider>
   );
 }
 
