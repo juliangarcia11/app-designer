@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import {
@@ -22,7 +22,7 @@ export function QuestionPrompt({
   onSubmit,
   isLoading,
 }: QuestionPromptProps) {
-  const [response, setResponse] = React.useState("");
+  const [response, setResponse] = useState("");
 
   const handleSubmit = () => {
     if (response.trim() === "") return;

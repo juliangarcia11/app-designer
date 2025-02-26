@@ -3,7 +3,6 @@ import {
   RequirementQuestion,
   UserResponse,
   DesignSection,
-  DesignDocument,
 } from "./types";
 import { INITIAL_QUESTIONS, DESIGN_DOCUMENT_TEMPLATE } from "./config";
 import {

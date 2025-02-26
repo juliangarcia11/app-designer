@@ -11,7 +11,6 @@ import {
   RequirementQuestion,
   UserResponse,
   DesignSection,
-  WorkflowState,
 } from "./types";
 
 // Initialize the LLM with Ollama
