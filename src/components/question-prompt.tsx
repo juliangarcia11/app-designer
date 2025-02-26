@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import {
@@ -10,6 +10,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { RequirementQuestion } from "@/lib/types";
+import { ANSWERS } from "@/mocks/answers";
 
 interface QuestionPromptProps {
   question: RequirementQuestion;
@@ -23,6 +24,14 @@ export function QuestionPrompt({
   isLoading,
 }: QuestionPromptProps) {
   const [response, setResponse] = useState("");
+
+  // For development purposes, pre-fill the response with the initial answer
+  useEffect(() => {
+    if (process.env.NODE_ENV === "development") {
+      const answer = ANSWERS.find((a) => a.id === question.id);
+      setResponse(answer ? answer.answer : "");
+    }
+  }, [question.id]);
 
   const handleSubmit = () => {
     if (response.trim() === "") return;
@@ -63,6 +72,7 @@ export function QuestionPrompt({
           className="min-h-32"
           value={response}
           onChange={(e) => setResponse(e.target.value)}
+          disabled={isLoading}
         />
       </CardContent>
       <CardFooter className="flex justify-end">
