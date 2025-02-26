@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Button } from "@/components/ui/button";
 import { DesignDocumentView } from "@/components/design-document-view";
+import { ExportButton } from "@/components/export-button";
 import { OllamaStatusAlert } from "@/components/ollama-status-alert";
 import { ProgressIndicator } from "@/components/progress-indicator";
 import { QuestionPrompt } from "@/components/question-prompt";
@@ -9,6 +9,7 @@ import { RequirementsComplete } from "@/components/requirements-complete";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { ThemeProvider } from "@/hooks/use-theme";
 import { useWorkflow } from "@/hooks/use-workflow";
+
 import "./App.css";
 
 function App(): React.ReactElement {
@@ -85,7 +86,7 @@ function App(): React.ReactElement {
 
             {designDocumentReady && (
               <div className="mt-6 flex justify-center">
-                <Button>Export Design Document</Button>
+                <ExportButton document={state.designDocument} />
               </div>
             )}
           </TabsContent>

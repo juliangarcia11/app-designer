@@ -3,10 +3,11 @@
     windows_subsystem = "windows"
 )]
 
+use serde::{Deserialize, Serialize};
 use std::fs;
 use std::path::Path;
 use tauri::{command, AppHandle};
-use serde::{Deserialize, Serialize};
+use tauri_plugin_fs::FsExt;
 
 #[derive(Debug, Serialize, Deserialize)]
 struct ExportOptions {
@@ -18,15 +19,15 @@ struct ExportOptions {
 #[command]
 fn export_document(_app: AppHandle, options: ExportOptions) -> Result<String, String> {
     let path = Path::new(&options.path);
-    
+
     // Create any necessary directories
     if let Some(parent) = path.parent() {
         fs::create_dir_all(parent).map_err(|e| e.to_string())?;
     }
-    
+
     // Write the content to file
     fs::write(path, options.content).map_err(|e| e.to_string())?;
-    
+
     Ok("Document exported successfully".to_string())
 }
 
@@ -41,13 +42,25 @@ fn check_ollama_status() -> Result<bool, String> {
             } else {
                 Ok(false)
             }
-        },
+        }
         Err(_) => Ok(false),
     }
 }
 
 fn main() {
     tauri::Builder::default()
+        .plugin(tauri_plugin_dialog::init())
+        .plugin(tauri_plugin_fs::init())
+        .setup(|app| {
+            // allowed the given directory
+            let scope = app.fs_scope();
+            scope
+                .allow_directory("/exports", false)
+                .map_err(|e| e.to_string())?;
+            dbg!(scope.is_allowed("/exports"));
+
+            Ok(())
+        })
         .invoke_handler(tauri::generate_handler![
             export_document,
             check_ollama_status
