@@ -85,9 +85,7 @@ function App(): React.ReactElement {
             <DesignDocumentView document={state.designDocument} />
 
             {designDocumentReady && (
-              <div className="mt-6 flex justify-center">
-                <ExportButton document={state.designDocument} />
-              </div>
+              <ExportButton document={state.designDocument} />
             )}
           </TabsContent>
         </Tabs>

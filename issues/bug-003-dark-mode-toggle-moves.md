@@ -2,14 +2,15 @@
 
 ## Status
 
-- [x] Open
+- [ ] Open
 - [ ] In Progress
-- [ ] Resolved
+- [x] Resolved
 - [ ] Won't Fix
 
 ## Details
 
 - **Created**: 2025-02-26
+- **Resolved**: 2025-02-26
 - **Priority**: Low
 - **Affects**:
   - `App.tsx`
