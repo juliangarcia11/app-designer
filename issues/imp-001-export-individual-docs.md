@@ -2,29 +2,32 @@
 
 ## Status
 
-- [x] Proposed
+- [ ] Proposed
 - [ ] Planned
 - [ ] In Progress
-- [ ] Completed
+- [x] Completed
 - [ ] Abandoned
 
 ## Details
 
-- **Created**: 2023-10-10
+- **Created**: 2025-02-26
+- **Initial Implementation**: 2025-02-26
 - **Priority**: Medium
-- **Affects**: Export Functionality
+- **Affects**:
+  - `src/components/export-button.tsx`
+  - `src-tauri/src/main.rs`
 
 ## Description
 
-Currently, the application exports the entire design document as a single file. This improvement proposes to export each section of the design document as individual files.
+Currently, the application exports the entire design document set as a single file. This improvement proposes to export each section of the design document set as individual files.
 
 ## Current Behavior
 
-The application combines all sections of the design document into a single file and exports it.
+The application combines all sections of the design document set into a single file and exports it.
 
 ## Desired Behavior
 
-Each section of the design document should be exported as a separate file. The user should be able to select a directory, and the application will create individual files for each section within that directory.
+Each section of the design document set should be exported as a separate file. The user should be able to select a directory, and the application will create individual files for each section within that directory.
 
 ## Benefits
 

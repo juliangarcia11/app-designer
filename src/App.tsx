@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Toaster } from "sonner";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { DesignDocumentView } from "@/components/design-document-view";
 import { ExportButton } from "@/components/export-button";
@@ -39,6 +40,7 @@ function App(): React.ReactElement {
 
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+      <Toaster richColors position="top-center" />
       <div className="container mx-auto py-8 px-4">
         <OllamaStatusAlert />
 
@@ -85,7 +87,9 @@ function App(): React.ReactElement {
             <DesignDocumentView document={state.designDocument} />
 
             {designDocumentReady && (
-              <ExportButton document={state.designDocument} />
+              <div className="mt-6 flex justify-center">
+                <ExportButton document={state.designDocument} />
+              </div>
             )}
           </TabsContent>
         </Tabs>

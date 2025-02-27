@@ -9,22 +9,16 @@
 
 ### Features
 
-<!-- Add new features here -->
-
 ### Improvements
-
-- [IMP-001](imp-001-export-individual-docs.md) - Export Individual Documents
 
 ## Resolved Issues
 
 ### Bugs
 
-- [BUG-003](bug-003-dark-mode-toggle-moves.md) - Dark mode toggle moves when scrolling overflowed content
+1. [BUG-003](bug-003-dark-mode-toggle-moves.md) - Dark mode toggle moves when scrolling overflowed content
 
 ### Features
 
-<!-- Add completed features here -->
-
 ### Improvements
 
-<!-- Add completed improvements here -->
+1. [IMP-001](imp-001-export-individual-docs.md) - Export Individual Documents
